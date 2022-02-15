@@ -1,3 +1,5 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+Initial version of the plugin. This version includes:
+
+- Checking Network State on Android and iOS
