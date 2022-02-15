@@ -1,3 +1,8 @@
+## 0.0.3
+
+- Updated Docs on version mismatch
+
+
 ## 0.0.2
 
 - Downgraded SDK version to support 2.16.0

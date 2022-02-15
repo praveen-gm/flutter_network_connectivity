@@ -1,6 +1,6 @@
 # Flutter Network Connectivity
 
-[![Pub](https://img.shields.io/badge/pub-v0.0.2-orange)](https://pub.dev/packages/flutter_network_connectivity)
+[![Pub](https://img.shields.io/badge/pub-v0.0.3-orange)](https://pub.dev/packages/flutter_network_connectivity)
 
 A Flutter Plugin to check network status.
 
@@ -10,7 +10,7 @@ First, add `flutter_network_connectivity` as a dependency in your pubspec.yaml f
 
 ```yaml
 dependencies:
-  flutter_network_connectivity: ^0.0.2
+  flutter_network_connectivity: ^0.0.3
 ```
 
 Don't forget to `flutter pub get`.
