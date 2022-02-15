@@ -19,3 +19,6 @@ Thanks for thinking about Contribution, You can contribute to this project as ea
 - Verify with example app before raising a PR.
 - Reformat code as per standard guidelines
 - Use comments to describe the code
+
+## License
+By contributing, you agree that your contributions will be licensed under its MIT License.
