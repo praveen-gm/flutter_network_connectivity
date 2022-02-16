@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 
@@ -29,15 +30,19 @@ class FlutterNetworkConnectivity {
 
   /// Register Listener to check for Network Stream
   /// Must be unregistered if not in use
+  /// registering only on android as iOS makes use of NetworkMonitor
   Future registerNetworkListener() async {
-    await _methodChannel.invokeMethod("registerNetworkStatusListener");
-
-    _eventChannel.receiveBroadcastStream().cast<bool>().listen((event) {});
+    if (Platform.isAndroid) {
+      await _methodChannel.invokeMethod("registerNetworkStatusListener");
+    }
   }
 
   /// Unregister Listener when not in use
+  /// unregister only on android as iOS makes use of NetworkMonitor
   Future unregisterNetworkListener() async {
-    await _methodChannel.invokeMethod("unregisterNetworkStatusListener");
+    if (Platform.isAndroid) {
+      await _methodChannel.invokeMethod("unregisterNetworkStatusListener");
+    }
   }
 
   /// Returns Stream of bool denoting network status

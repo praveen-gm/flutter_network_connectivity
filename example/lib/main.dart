@@ -19,7 +19,9 @@ class _MyAppState extends State<MyApp> {
   final FlutterNetworkConnectivity _flutterNetworkConnectivity =
       FlutterNetworkConnectivity();
 
-  bool? _isNetworkConnected;
+  bool? _isNetworkConnectedOnCall;
+
+  bool? _isNetworkConnectedStreamStatus;
 
   StreamSubscription<bool>? _networkConnectionStream;
 
@@ -28,11 +30,11 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     _flutterNetworkConnectivity.getNetworkStatusStream().listen((event) {
-      _isNetworkConnected = event;
+      _isNetworkConnectedStreamStatus = event;
       setState(() {});
     });
 
-    // init();
+    init();
   }
 
   @override
@@ -51,10 +53,10 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      _isNetworkConnected =
+      _isNetworkConnectedOnCall =
           await _flutterNetworkConnectivity.isNetworkAvailable();
     } on PlatformException {
-      _isNetworkConnected = null;
+      _isNetworkConnectedOnCall = null;
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -72,24 +74,93 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Flutter Network Connectivity'),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                null == _isNetworkConnected
-                    ? 'Unknown State'
-                    : _isNetworkConnected!
-                        ? "You're Connected to Network"
-                        : "You're Offline",
+        body: Column(
+          children: [
+            Expanded(
+              child: Container(
+                color: Colors.black12,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 24.0),
+                      const Text(
+                        'Live Network Stream Status',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            null == _isNetworkConnectedStreamStatus
+                                ? 'Unknown State'
+                                : _isNetworkConnectedStreamStatus!
+                                    ? "You're Connected to Network"
+                                    : "You're Offline",
+                            style: const TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              const SizedBox(height: 50.0),
-              ElevatedButton(
-                onPressed: _checkNetworkState,
-                child: const Text('Check Network State'),
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.lightGreen.shade400,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 24.0),
+                      const Text(
+                        'Network Status on Call',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              null == _isNetworkConnectedOnCall
+                                  ? 'Unknown State'
+                                  : _isNetworkConnectedOnCall!
+                                      ? "You're Connected to Network"
+                                      : "You're Offline",
+                              style: const TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 50.0),
+                            ElevatedButton(
+                              onPressed: _checkNetworkState,
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.amberAccent,
+                              ),
+                              child: const Text(
+                                'Check Network State',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
