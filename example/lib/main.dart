@@ -21,11 +21,28 @@ class _MyAppState extends State<MyApp> {
 
   bool? _isNetworkConnected;
 
+  StreamSubscription<bool>? _networkConnectionStream;
+
   @override
   void initState() {
     super.initState();
 
-    _checkNetworkState();
+    _flutterNetworkConnectivity.getNetworkStatusStream().listen((event) {
+      print(event);
+    });
+
+    init();
+  }
+
+  @override
+  void dispose() {
+    _networkConnectionStream?.cancel();
+
+    super.dispose();
+  }
+
+  void init() async {
+    await _flutterNetworkConnectivity.registerNetworkListener();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -67,9 +84,7 @@ class _MyAppState extends State<MyApp> {
               ),
               const SizedBox(height: 50.0),
               ElevatedButton(
-                onPressed: () {
-                  _checkNetworkState();
-                },
+                onPressed: _checkNetworkState,
                 child: const Text('Check Network State'),
               ),
             ],
