@@ -28,10 +28,11 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     _flutterNetworkConnectivity.getNetworkStatusStream().listen((event) {
-      print(event);
+      _isNetworkConnected = event;
+      setState(() {});
     });
 
-    init();
+    // init();
   }
 
   @override
