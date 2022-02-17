@@ -1,3 +1,9 @@
+## 0.0.4
+
+- Downgraded SDK to 2.12.0
+- Introducing Network Status on Stream
+
+
 ## 0.0.3
 
 - Updated Docs on version mismatch
