@@ -38,8 +38,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  void dispose() {
+  void dispose() async {
     _networkConnectionStream?.cancel();
+    _flutterNetworkConnectivity.unregisterNetworkListener();
 
     super.dispose();
   }
