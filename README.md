@@ -11,16 +11,19 @@ First, add `flutter_network_connectivity` as a dependency in your pubspec.yaml f
 
 ```yaml
 dependencies:
-  flutter_network_connectivity: ^0.0.4 ```
+  flutter_network_connectivity: ^0.0.4
+```
 
 Don't forget to `flutter pub get`.
 
 Then import:
 
-``` dart
+```dart
 import 'package:flutter_network_connectivity/flutter_network_connectivity.dart';
 ```
+
 Now you can create FlutterNetworkConnectivity object and use its methods
+
 ```
 FlutterNetworkConnectivity flutterNetworkConnectivity =
     FlutterNetworkConnectivity();
@@ -33,33 +36,36 @@ _flutterNetworkConnectivity.getNetworkStatusStream().listen((isConnected) {
 ```
 
 Then Register Listener after setting up listener
+
 ```
 await _flutterNetworkConnectivity.registerNetworkListener();
 ```
 
 Unregister on dispose
+
 ```
 _flutterNetworkConnectivity.unregisterNetworkListener();
 ```
 
 ### To Check for Current Nnetwork Status on Call
+
 ```
 bool isNetworkConnected =
     await flutterNetworkConnectivity.isNetworkAvailable();
 ```
 
-
 ### Examples
 Simple usage example can be found [in the example folder](example/lib/main.dart).
-
 
 **Android**
 
 Uses permission
+
 ```
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
+
 Minimum SDK Version 16
 
 **iOS**
@@ -67,7 +73,7 @@ Uses NetworkMonitor, minimum required version 12.0
 
 **Demo**
 
- ![Screenshot](/sample/demo.gif)
+![Screenshot](/sample/demo.gif =534x300)
 
 ### About
 This plugin uses [NetworkCapabilities](https://developer.android.com/reference/android/net/NetworkCapabilities) for Android and [NetworkMonitor](https://developer.apple.com/documentation/network) for iOS.
