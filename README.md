@@ -73,7 +73,7 @@ Uses NetworkMonitor, minimum required version 12.0
 
 **Demo**
 
-![Screenshot](/sample/demo.gif)
+![Screenshot](/screenshots/demo.gif)
 
 ### About
 This plugin uses [NetworkCapabilities](https://developer.android.com/reference/android/net/NetworkCapabilities) for Android and [NetworkMonitor](https://developer.apple.com/documentation/network) for iOS.
