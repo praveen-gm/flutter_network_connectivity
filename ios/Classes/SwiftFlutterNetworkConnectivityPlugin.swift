@@ -5,11 +5,13 @@ import Network
 
 public class SwiftFlutterNetworkConnectivityPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
     
+    // EventSink to pass stream of network changes through EventChannel
     private var eventSink: FlutterEventSink?
     
     private let queue = DispatchQueue.global()
     private let monitor: NWPathMonitor = NWPathMonitor()
     
+    // isConnected value used to send network status on call
     private var isConnected: Bool = false
     
     public static func register(with registrar: FlutterPluginRegistrar) {
@@ -56,7 +58,6 @@ public class SwiftFlutterNetworkConnectivityPlugin: NSObject, FlutterPlugin, Flu
                 self.isConnected = false
                 self.eventSink?(false)
             }
-            //            self?.isConnected = path.status == .satisfied
         }
     }
     
