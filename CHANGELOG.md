@@ -1,3 +1,7 @@
+## 0.0.5
+
+- Updated Gif's to Doc
+
 ## 0.0.4
 
 - Downgraded SDK to 2.12.0

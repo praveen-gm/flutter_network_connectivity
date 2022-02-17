@@ -1,7 +1,7 @@
 
 # Flutter Network Connectivity
 
-[![Pub](https://img.shields.io/badge/pub-v0.0.4-orange)](https://pub.dev/packages/flutter_network_connectivity)
+[![Pub](https://img.shields.io/badge/pub-v0.0.5-orange)](https://pub.dev/packages/flutter_network_connectivity)
 
 A Flutter Plugin to check for live network connectivity status via Stream or On Call.
 
@@ -11,7 +11,7 @@ First, add `flutter_network_connectivity` as a dependency in your pubspec.yaml f
 
 ```yaml
 dependencies:
-  flutter_network_connectivity: ^0.0.4
+  flutter_network_connectivity: ^0.0.5
 ```
 
 Don't forget to `flutter pub get`.
@@ -47,7 +47,7 @@ Unregister on dispose
 _flutterNetworkConnectivity.unregisterNetworkListener();
 ```
 
-### To Check for Current Nnetwork Status on Call
+### To Check for Current Network Status on Call
 
 ```
 bool isNetworkConnected =
@@ -73,7 +73,7 @@ Uses NetworkMonitor, minimum required version 12.0
 
 **Demo**
 
-![Screenshot](/screenshots/demo.gif)
+![Screenshot](https://raw.githubusercontent.com/praveen-gm/flutter_network_connectivity/main/screenshots/demo.gif "Sample Gif")
 
 ### About
 This plugin uses [NetworkCapabilities](https://developer.android.com/reference/android/net/NetworkCapabilities) for Android and [NetworkMonitor](https://developer.apple.com/documentation/network) for iOS.
