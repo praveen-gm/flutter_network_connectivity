@@ -17,11 +17,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final FlutterNetworkConnectivity _flutterNetworkConnectivity =
-      FlutterNetworkConnectivity();
+      FlutterNetworkConnectivity(
+    isContinousLookUp: true,
+    // optional, false if you cont want continous lookup
+    lookUpDuration: const Duration(seconds: 5),
+    // optional, to override default lookup duration
+    lookUpUrl: 'example.com', // optional, to override default lookup url
+  );
 
-  bool? _isNetworkConnectedOnCall;
+  bool? _isInternetAvailableOnCall;
 
-  bool? _isNetworkConnectedStreamStatus;
+  bool? _isInternetAvailableStreamStatus;
 
   StreamSubscription<bool>? _networkConnectionStream;
 
@@ -29,8 +35,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    _flutterNetworkConnectivity.getNetworkStatusStream().listen((event) {
-      _isNetworkConnectedStreamStatus = event;
+    _flutterNetworkConnectivity.getInternetAvailabilityStream().listen((event) {
+      _isInternetAvailableStreamStatus = event;
       setState(() {});
     });
 
@@ -40,24 +46,24 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() async {
     _networkConnectionStream?.cancel();
-    _flutterNetworkConnectivity.unregisterNetworkListener();
+    _flutterNetworkConnectivity.unregisterAvailabilityListener();
 
     super.dispose();
   }
 
   void init() async {
-    await _flutterNetworkConnectivity.registerNetworkListener();
+    await _flutterNetworkConnectivity.registerAvailabilityListener();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> _checkNetworkState() async {
+  Future<void> _checkInternetAvailability() async {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      _isNetworkConnectedOnCall =
-          await _flutterNetworkConnectivity.isNetworkAvailable();
+      _isInternetAvailableOnCall =
+          await _flutterNetworkConnectivity.isInternetConnectionAvailable();
     } on PlatformException {
-      _isNetworkConnectedOnCall = null;
+      _isInternetAvailableOnCall = null;
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -86,17 +92,18 @@ class _MyAppState extends State<MyApp> {
                     children: [
                       const SizedBox(height: 24.0),
                       const Text(
-                        'Live Network Stream Status',
+                        'Internet Availability Stream',
                         style: TextStyle(
                           fontSize: 16.0,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                       Expanded(
                         child: Center(
                           child: Text(
-                            null == _isNetworkConnectedStreamStatus
+                            null == _isInternetAvailableStreamStatus
                                 ? 'Unknown State'
-                                : _isNetworkConnectedStreamStatus!
+                                : _isInternetAvailableStreamStatus!
                                     ? "You're Connected to Network"
                                     : "You're Offline",
                             style: const TextStyle(
@@ -120,7 +127,7 @@ class _MyAppState extends State<MyApp> {
                     children: [
                       const SizedBox(height: 24.0),
                       const Text(
-                        'Network Status on Call',
+                        'Internet Availability Status on Call',
                         style: TextStyle(
                           fontSize: 16.0,
                         ),
@@ -130,9 +137,9 @@ class _MyAppState extends State<MyApp> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              null == _isNetworkConnectedOnCall
+                              null == _isInternetAvailableOnCall
                                   ? 'Unknown State'
-                                  : _isNetworkConnectedOnCall!
+                                  : _isInternetAvailableOnCall!
                                       ? "You're Connected to Network"
                                       : "You're Offline",
                               style: const TextStyle(
@@ -142,7 +149,7 @@ class _MyAppState extends State<MyApp> {
                             ),
                             const SizedBox(height: 50.0),
                             ElevatedButton(
-                              onPressed: _checkNetworkState,
+                              onPressed: _checkInternetAvailability,
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.amberAccent,
                               ),
