@@ -1,6 +1,14 @@
+## 0.0.6
+
+- Check for Internet Availability as on Connectivity Status Change
+- Check on Periodic Interval, Customize Interval Duration
+- Custom URL to Lookup
+
+
 ## 0.0.5
 
 - Updated Gif's to Doc
+
 
 ## 0.0.4
 

@@ -1,9 +1,8 @@
-
 # Flutter Network Connectivity
 
-[![Pub](https://img.shields.io/badge/pub-v0.0.5-orange)](https://pub.dev/packages/flutter_network_connectivity)
+[![Pub](https://img.shields.io/badge/pub-v0.0.6-orange)](https://pub.dev/packages/flutter_network_connectivity)
 
-A Flutter Plugin to check for live network connectivity status via Stream or On Call.
+A flutter plugin to check for Internet Availability as a stream based on network connectivity status, periodic interval or on call.
 
 # Usage
 
@@ -11,7 +10,7 @@ First, add `flutter_network_connectivity` as a dependency in your pubspec.yaml f
 
 ```yaml
 dependencies:
-  flutter_network_connectivity: ^0.0.5
+  flutter_network_connectivity: ^0.0.6
 ```
 
 Don't forget to `flutter pub get`.
@@ -24,34 +23,38 @@ import 'package:flutter_network_connectivity/flutter_network_connectivity.dart';
 
 Now you can create FlutterNetworkConnectivity object and use its methods
 
-```
+```dart
 FlutterNetworkConnectivity flutterNetworkConnectivity =
-    FlutterNetworkConnectivity();
- ```
-### To Check for Stream of Network Connectivity Status
+    FlutterNetworkConnectivity(
+	  isContinousLookUp: true,  // optional, false if you cont want continous lookup
+	  lookUpDuration: const Duration(seconds: 5),  // optional, to override default lookup duration
+	  lookUpUrl: 'example.com',  // optional, to override default lookup url
+	);
 ```
-_flutterNetworkConnectivity.getNetworkStatusStream().listen((isConnected) {
-  // isConnected returns true/false on Network Connectivity Changes
+### To Check for Stream of Network Connectivity Status
+```dart
+_flutterNetworkConnectivity.getInternetAvailabilityStream().listen((isInternetAvailable) {
+  // do something
 });
 ```
 
-Then Register Listener after setting up listener
+Then Register Availability Listener after setting up Stream Listerer
 
-```
-await _flutterNetworkConnectivity.registerNetworkListener();
+```dart
+await _flutterNetworkConnectivity.registerAvailabilityListener();
 ```
 
 Unregister on dispose
 
-```
-_flutterNetworkConnectivity.unregisterNetworkListener();
+```dart
+await _flutterNetworkConnectivity.unregisterAvailabilityListener();
 ```
 
-### To Check for Current Network Status on Call
+### To Check for Internet Availability on Call
 
-```
-bool isNetworkConnected =
-    await flutterNetworkConnectivity.isNetworkAvailable();
+```dart
+bool _isNetworkConnectedOnCall = await
+    _flutterNetworkConnectivity.isInternetConnectionAvailable();
 ```
 
 ### Examples
@@ -76,9 +79,8 @@ Uses NetworkMonitor, minimum required version 12.0
 ![Screenshot](https://raw.githubusercontent.com/praveen-gm/flutter_network_connectivity/main/screenshots/demo.gif "Sample Gif")
 
 ### About
-This plugin uses [NetworkCapabilities](https://developer.android.com/reference/android/net/NetworkCapabilities) for Android and [NetworkMonitor](https://developer.apple.com/documentation/network) for iOS.
+This plugin uses [NetworkCapabilities](https://developer.android.com/reference/android/net/NetworkCapabilities) for Android and [NetworkMonitor](https://developer.apple.com/documentation/network) for iOS to check for network connectivity status.
 
 
 ### Contributing?
-You're always welcome.
-See [Contributing Guidelines](CONTRIBUTING.md). You can also take a look at [Status Tracker](https://github.com/praveen-gm/flutter_network_connectivity/projects/1) to know more information about current or pending features/issues.
+You're always welcome. See [Contributing Guidelines](CONTRIBUTING.md). You can also take a look at [Status Tracker](https://github.com/praveen-gm/flutter_network_connectivity/projects/1) to know more information about current or pending features/issues.

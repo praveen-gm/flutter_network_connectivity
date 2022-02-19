@@ -6,6 +6,9 @@ void main() {
   const MethodChannel channel = MethodChannel(
       'com.livelifedev.flutter_network_connectivity/network_state');
 
+  FlutterNetworkConnectivity flutterNetworkConnectivity =
+      FlutterNetworkConnectivity();
+
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUp(() {
@@ -19,6 +22,12 @@ void main() {
   });
 
   test('isNetworkAvailable', () async {
-    expect(await FlutterNetworkConnectivity().isNetworkAvailable(), true);
+    expect(
+        await flutterNetworkConnectivity.isNetworkConnectionAvailable(), true);
+  });
+
+  test("isInternetConnectionAvailable", () async {
+    expect(await flutterNetworkConnectivity.isInternetConnectionAvailable(),
+        isNotNull);
   });
 }
