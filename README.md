@@ -72,7 +72,9 @@ Uses permission
 Minimum SDK Version 16
 
 **iOS**
+
 Uses NetworkMonitor, minimum required version 12.0
+
 
 **Demo**
 
