@@ -3,8 +3,6 @@ name: flutter_network_connectivity
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
