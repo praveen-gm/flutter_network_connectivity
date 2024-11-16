@@ -1,7 +1,7 @@
 name: flutter_network_connectivity
 description: A Flutter Plugin to check for live network connectivity status. Plugin uses NetworkCapabilities for
   Android and NetworkMonitor for iOS.
-version: 0.0.6
+version: 0.0.7
 homepage: https://github.com/praveen-gm/flutter_network_connectivity
 
 environment:
