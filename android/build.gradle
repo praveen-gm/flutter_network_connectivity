@@ -25,6 +25,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace = "com.livelifedev.flutter_network_connectivity"
     compileSdkVersion 31
 
     compileOptions {
