@@ -1,3 +1,7 @@
+## 0.0.7
+
+- Added missing namespace
+
 ## 0.0.6
 
 - Check for Internet Availability as on Connectivity Status Change
